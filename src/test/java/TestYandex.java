@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class TestYandex {
     static final String url = "https://yandex.ru";
     static WebDriver driver;
+    static WebDriverWait wait;
 
     @BeforeAll
     static void setUp() {
@@ -20,8 +21,8 @@ public class TestYandex {
         System.setProperty("webdriver.chrome.driver", "bin/chromedriver.exe");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
+        wait = new WebDriverWait(driver,10,200);
+
 
     }
 
@@ -35,7 +36,8 @@ public class TestYandex {
         WebElement clickNotFill = driver.findElement(By.xpath("//button[@type='submit']"));
         clickNotFill.click();
 
-        WebElement visibleText = driver.findElement(By.xpath("//div[@class='Textinput-Hint Textinput-Hint_state_error']"));
+        //Ждем пока появится предупреждение что "Логин не указан"
+        WebElement visibleText = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='Textinput-Hint Textinput-Hint_state_error']")));
         Assertions.assertNotNull(visibleText.getText());
 
     }
