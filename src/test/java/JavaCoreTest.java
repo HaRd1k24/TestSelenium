@@ -17,7 +17,6 @@ public class JavaCoreTest {
     @BeforeAll
     static void setUp() {
         ChromeOptions options = new ChromeOptions();
-
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         System.setProperty("webdriver.chrome.driver", "bin/chromedriver.exe");
         driver = new ChromeDriver(options);

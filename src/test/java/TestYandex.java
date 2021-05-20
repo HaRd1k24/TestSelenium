@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 public class TestYandex {
     static final String url = "https://yandex.ru";
     static WebDriver driver;
-    static WebDriverWait driverWait;
 
     @BeforeAll
     static void setUp() {
