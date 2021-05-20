@@ -1,7 +1,4 @@
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +6,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class JavaCoreTest {
     static WebDriver driver;
@@ -30,36 +29,40 @@ public class JavaCoreTest {
     @DisplayName("Тест меню сайта")
     void testSiteJavaCore() throws InterruptedException {
         driver.get("https://howtodoinjava.com/");
-        String[] str = {"Java 10 Tutorial","Java 12 Tutorial"};
 
+        List<String> list = Arrays.asList("Java 10 Tutorial", "Java 12 Tutorial", "Java 14 Tutorial", "Java 11 Tutorial");
 
-        for (String s : str) {
-
-
-        }
+        checkingHeaders(list);
     }
 
 
-    void checkingHeaders(String str) throws InterruptedException {
+    private void checkingHeaders(List<String> list) throws InterruptedException {
+        for (String s : list) {
+            WebElement clickGuide = driver.findElement(By.xpath(String.format("//ol//a[text()='%s']", s)));
+            clickGuide.click();
+            Assertions.assertNotNull(clickGuide);
+            WebElement leftBlock = driver.findElement(By.xpath("//aside[@aria-label='Secondary Sidebar']"));
 
-        WebElement clickGuide = driver.findElement(By.xpath(String.format("//ol//a[text()='%s']", str)));
-        clickGuide.click();
-        Assertions.assertNotNull(clickGuide);
-        WebElement leftBlock = driver.findElement(By.xpath("//aside[@aria-label='Secondary Sidebar']"));
+            List<String> listText = new ArrayList<>(Collections.singleton(leftBlock.getText()));
+            Assertions.assertTrue(listText.contains(leftBlock.getText()));
 
-        ArrayList<String> list = new ArrayList<>(Collections.singleton(leftBlock.getText()));
-        Assertions.assertTrue(list.contains(leftBlock.getText()));
+            WebElement upBlock = driver.findElement(By.xpath("//div[@class='breadcrumb']"));
+            Assertions.assertNotNull(upBlock);
 
-        WebElement upBlock = driver.findElement(By.xpath("//div[@class='breadcrumb']"));
-        Assertions.assertNotNull(upBlock);
+            WebElement onTum = driver.findElement(By.xpath("//div[@class='wpnm-button style-2']"));
+            onTum.click();
 
-        WebElement onTum = driver.findElement(By.xpath("//div[@class='wpnm-button style-2']"));
-        onTum.click();
+            WebElement offTum = driver.findElement(By.xpath("//div[@class='wpnm-button style-2 active']"));
+            offTum.click();
+
+            driver.navigate().back();
+        }
+
+    }
+
+    @AfterAll
+    static void exitChrome() {
         driver.close();
-        Thread.sleep(1000);
-
-
-
     }
 
 }
