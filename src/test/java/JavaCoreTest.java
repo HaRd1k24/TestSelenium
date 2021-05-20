@@ -30,12 +30,12 @@ public class JavaCoreTest {
     @DisplayName("Тест меню сайта")
     void testSiteJavaCore() throws InterruptedException {
         driver.get("https://howtodoinjava.com/");
-        String[] str = {"Java 10 Tutorial"};
+        String[] str = {"Java 10 Tutorial","Java 12 Tutorial"};
 
 
         for (String s : str) {
 
-            checkingHeaders(s);
+
         }
     }
 
@@ -55,6 +55,9 @@ public class JavaCoreTest {
 
         WebElement onTum = driver.findElement(By.xpath("//div[@class='wpnm-button style-2']"));
         onTum.click();
+        driver.close();
+        Thread.sleep(1000);
+
 
 
     }
