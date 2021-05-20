@@ -10,8 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 
 public class TestYandex {
-
+    static final String url = "https://yandex.ru";
     static WebDriver driver;
+    static WebDriverWait driverWait;
 
     @BeforeAll
     static void setUp() {
@@ -31,7 +32,7 @@ public class TestYandex {
     @Test
     @DisplayName("Негативный тест")
     void testNotAvt() {
-        driver.get("https://yandex.ru");
+        driver.get(url);
         WebElement clickLog = driver.findElement(By.xpath("//div[text()='Войти']"));
         clickLog.click();
 

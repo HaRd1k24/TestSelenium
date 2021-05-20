@@ -12,6 +12,7 @@ import java.util.List;
 
 public class JavaCoreTest {
     static WebDriver driver;
+    static final String url = "https://howtodoinjava.com/";
 
     @BeforeAll
     static void setUp() {
@@ -28,7 +29,7 @@ public class JavaCoreTest {
     @Test
     @DisplayName("Тест меню сайта")
     void testSiteJavaCore() throws InterruptedException {
-        driver.get("https://howtodoinjava.com/");
+        driver.get(url);
 
         List<String> list = Arrays.asList("Java 10 Tutorial", "Java 12 Tutorial", "Java 14 Tutorial", "Java 11 Tutorial");
 
