@@ -23,7 +23,6 @@ public class JavaCoreTest {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
 
-
     }
 
     @Test
@@ -36,8 +35,7 @@ public class JavaCoreTest {
         checkingHeaders(list);
     }
 
-
-    private void checkingHeaders(List<String> list) throws InterruptedException {
+    private void checkingHeaders(List<String> list) {
         for (String s : list) {
             WebElement clickGuide = driver.findElement(By.xpath(String.format("//ol//a[text()='%s']", s)));
             clickGuide.click();
@@ -58,7 +56,6 @@ public class JavaCoreTest {
 
             driver.navigate().back();
         }
-
     }
 
     @AfterAll

@@ -24,9 +24,6 @@ public class TestYandex {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
 
-
-
-
     }
 
     @Test
